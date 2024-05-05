@@ -1,0 +1,83 @@
+﻿<Window x:Class="Commands.Bindings.MVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Commands.Bindings.MVVM"
+        mc:Ignorable="d"
+        Title="CV Application" Height="450" Width="500">
+    <Window.Resources>
+        <Style x:Key="StackPanelStyle1" TargetType="{x:Type StackPanel}">
+            <Style.Setters>
+                <Setter Property="Orientation" Value="Horizontal"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Style.Setters>
+                <Setter Property="Margin" Value="5"></Setter>
+                <Setter Property="Width" Value="60"></Setter>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="8" Style="{DynamicResource StackPanelStyle1}">
+                <Button Content="OK" Style="{DynamicResource ButtonStyle1}" ></Button>
+                <Button Content="Cancel" Style="{DynamicResource ButtonStyle1}"></Button>
+        </StackPanel>
+        <TextBlock Grid.Row="0" Text="Загальна інформація" FontWeight="Bold" FontSize="20"></TextBlock>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="ПІБ:"></Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FullName}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Вік:"></Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Age}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Сімейний стан:"></Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding MaritalStatus}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Адреса:"></Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Address}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Email:"></Label>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Email}"/>
+        </Grid>
+        <TextBlock Grid.Row="2" Text="Тверді навички" FontWeight="Bold" FontSize="20"></TextBlock>
+        <TextBlock Grid.Row="3" Text="Технології"></TextBlock>
+        <WrapPanel Grid.Row="4">
+            <CheckBox Content="С++" IsChecked="{Binding CPlusPlusSkill}"/>
+            <CheckBox Content="C#" IsChecked="{Binding CSharpSkill}"/>
+            <CheckBox Content="SQL" IsChecked="{Binding SqlSkill}"/>
+            <CheckBox Content="JavaScript" IsChecked="{Binding JavaScriptSkill}"/>
+        </WrapPanel>
+        <TextBlock Grid.Row="5" Text="Мови"></TextBlock>
+        <WrapPanel Grid.Row="6">
+            <CheckBox Content="Українська" IsChecked="{Binding UkrainianSkill}"/>
+            <CheckBox Content="Англійська" IsChecked="{Binding EnglishSkill}"/>
+            <CheckBox Content="Німецька" IsChecked="{Binding GermanSkill}"/>
+            <CheckBox Content="Французька" IsChecked="{Binding FrenchSkill}"/>
+        </WrapPanel>
+        <StackPanel Grid.Row="7" Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" Height="27"/>
+            <Button Content="View Resume" Command="{Binding ViewResumeCommand}" Height="27"/>
+        </StackPanel>
+    </Grid>
+</Window>
