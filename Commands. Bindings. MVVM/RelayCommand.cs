@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,19 +10,21 @@ namespace Commands.Bindings.MVVM
 {
     internal class RelayCommand
     {
-        private Action<object> _execute;
-        //private Predicate<object> _canExecute;
-
-        public RelayCommand(Action<object> execute)
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            //_canExecute = canExecute;
+            if (execute == null) throw new ArgumentNullException("execute");
+            _execute = execute;
+            _canExecute = canExecute;
         }
 
-        /*public bool CanExecute(object parameter)
+        public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter);
-        }*/
+            if (_canExecute != null)
+            {
+                return _canExecute(parameter);
+            }
+            return true;
+        }
 
         public void Execute(object parameter)
         {
@@ -33,5 +36,8 @@ namespace Commands.Bindings.MVVM
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
+
+        Action<object> _execute;
+        Predicate<object> _canExecute;
     }
 }

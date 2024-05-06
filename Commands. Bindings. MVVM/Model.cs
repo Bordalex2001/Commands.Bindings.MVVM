@@ -15,19 +15,4 @@ namespace Commands.Bindings.MVVM
         public string Email { get; set; }
         public List<string> Skills { get; set; }
     }
-
-    internal static class ResumeDB
-    {
-        public static List<Resume> resumes = new List<Resume>();
-
-        public static void AddResume(Resume resume)
-        {
-            resumes.Add(resume);
-        }
-
-        public static List<Resume> GetResumes()
-        {
-            return resumes;
-        }
-    }
 }
